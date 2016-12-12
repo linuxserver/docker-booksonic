@@ -10,9 +10,9 @@ URL_BASE="/${CONTEXT_PATH}"
 cd /app/booksonic
 exec \
 	s6-setuidgid abc java \
-	-D"${BOOKSONIC_OPT_PREFIX}".contextPath="${URL_BASE}" \
 	-D"${BOOKSONIC_OPT_PREFIX}".home=/config \
 	-D"${BOOKSONIC_OPT_PREFIX}".defaultPodcastFolder=/podcasts \
 	-D"${BOOKSONIC_OPT_PREFIX}".defaultMusicFolder=/books \
 	-jar /usr/share/java/jetty-runner.jar \
-	--host 0.0.0.0 --port 4040 booksonic.war
+	--host 0.0.0.0 --port 4040 --path "${URL_BASE}" \
+	booksonic.war
