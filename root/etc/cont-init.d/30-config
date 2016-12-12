@@ -1,6 +1,14 @@
 #!/usr/bin/with-contenv bash
 
+mkdir -p \
+	/config/transcode
+
+if [[ ! -e /config/transcode/ffmpeg || ! -e  /config/transcode/flac || ! -e /config/transcode/lame  ]]; then
+ln -sf /usr/bin/ffmpeg /config/transcode/
+ln -sf /usr/bin/flac /config/transcode/
+ln -sf /usr/bin/lame /config/transcode/
+fi
+
 chown -R abc:abc \
 	/app/booksonic \
 	/config
-
