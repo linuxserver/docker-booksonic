@@ -13,7 +13,7 @@ COPY prebuilds/ /prebuilds/
 ARG JETTY_VER="9.3.14.v20161028"
 
 # environment settings
-ENV HOME="/config"
+ENV BOOKSONIC_OPT_PREFIX="subsonic"
 
 # install build packages
 RUN \
@@ -25,7 +25,10 @@ RUN \
 # install runtime packages
  apk add --no-cache \
 	ffmpeg \
-	openjdk8-jre && \
+	flac \
+	lame \
+	openjdk8-jre \
+	ttf-dejavu && \
 
 # install jetty-runner
  mkdir -p \
@@ -54,3 +57,7 @@ RUN \
 
 # add local files
 COPY root/ /
+
+# ports and volumes
+EXPOSE 4040
+VOLUME /books /config /podcasts

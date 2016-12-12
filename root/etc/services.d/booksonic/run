@@ -2,5 +2,9 @@
 
 cd /app/booksonic
 exec \
-	s6-setuidgid abc java -jar /usr/share/java/jetty-runner.jar \
-	/app/booksonic/booksonic.war
+	s6-setuidgid abc java \
+	-D"${BOOKSONIC_OPT_PREFIX}".home=/config \
+	-D"${BOOKSONIC_OPT_PREFIX}".defaultPodcastFolder=/podcasts \
+	-D"${BOOKSONIC_OPT_PREFIX}".defaultMusicFolder=/books \
+	-jar /usr/share/java/jetty-runner.jar \
+	--host 0.0.0.0 --port 4040 booksonic.war
