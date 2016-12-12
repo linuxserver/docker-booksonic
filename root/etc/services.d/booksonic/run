@@ -10,7 +10,7 @@ URL_BASE="/${CONTEXT_PATH}"
 cd /app/booksonic
 exec \
 	s6-setuidgid abc java \
-	-D"${BOOKSONIC_OPT_PREFIX}".contextPath="/${CONTEXT_PATH}" \
+	-D"${BOOKSONIC_OPT_PREFIX}".contextPath="${URL_BASE}" \
 	-D"${BOOKSONIC_OPT_PREFIX}".home=/config \
 	-D"${BOOKSONIC_OPT_PREFIX}".defaultPodcastFolder=/podcasts \
 	-D"${BOOKSONIC_OPT_PREFIX}".defaultMusicFolder=/books \
