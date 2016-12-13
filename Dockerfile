@@ -10,6 +10,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 COPY prebuilds/ /prebuilds/
 
 # package version settings
+ARG BOOKSONIC_VER="1.1.Beta1"
 ARG JETTY_VER="9.3.14.v20161028"
 
 # environment settings
@@ -47,7 +48,7 @@ RUN \
 	/app/booksonic && \
  curl -o \
  /app/booksonic/booksonic.war -L \
-	https://github.com/popeen/Popeens-Subsonic/releases/download/1.1.Beta1/booksonic.war && \
+	"https://github.com/popeen/Popeens-Subsonic/releases/download/${BOOKSONIC_VER}/booksonic.war" && \
 
 # cleanup
  apk del --purge \
