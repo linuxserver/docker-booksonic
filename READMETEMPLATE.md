@@ -10,23 +10,29 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [IRC][ircurl] on freenode at `#linuxserver.io`
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
-# <image-name>
+# linuxserver/booksonic
+[![](https://images.microbadger.com/badges/version/linuxserver/booksonic.svg)](https://microbadger.com/images/linuxserver/booksonic "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/booksonic.svg)](https://microbadger.com/images/linuxserver/booksonic "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/booksonic.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/booksonic.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-booksonic)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-booksonic/)
+[hub]: https://hub.docker.com/r/linuxserver/booksonic/
 
-Provide a short, concise description of the application. No more than two SHORT paragraphs. Link to sources where possible and include an image illustrating your point if necessary. Point users to the original applications website, as that's the best place to get support - not here.
+[Booksonic][booksurl] is a server and an app for streaming your audiobooks to any pc or android phone. Most of the functionality is also availiable on other platforms that have apps for subsonic.
 
-Our Plex container has immaculate docs so follow that if in doubt for layout.
-
-`IMPORTANT, replace all instances of <image-name> with the correct dockerhub repo (ie linuxserver/plex) and <container-name> information (ie, plex)`
+[![booksonic](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/booksonic.png)][booksurl]
+[booksurl]: http://booksonic.org
 
 ## Usage
 
 ```
 docker create \
-  --name=<container-name> \
-  -v <path to data>:/config \
-  -e PGID=<gid> -e PUID=<uid>  \
-  -p 1234:1234 \
-  <image-name>
+  --name=booksonic \
+-v </path/to/config>:/config \
+-v </path/to/audiobooks>:/books \
+-v </path/to/podcasts>:/podcasts \
+-v </path/to/other media>:/media \
+-e PGID=<gid> -e PUID=<uid> \
+-e CONTEXT_PATH=<url-base> \
+-e TZ=<timezone> \
+-p 4040:4040 \
+  linuxserver/booksonic
 ```
 
 ## Parameters
@@ -38,12 +44,17 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 
 
 
-* `-p 1234` - the port(s)
-* `-v /config` - explain what lives here
-* `-e PGID` for GroupID - see below for explanation
-* `-e PUID` for UserID - see below for explanation
+* `-p 4040` - the port(s)
+* `-v /config` - Configuration file location
+* `-v /books` - Location of audiobooks.
+* `-v /podcasts` - Location of podcasts.
+* `-v /media` - Location of other media - *optional*
+* `-e PGID` for for GroupID - see below for explanation - *optional*
+* `-e PUID` for for UserID - see below for explanation - *optional*
+* `-e CONTEXT_PATH` for setting url-base in reverse proxy setups - *optional*
+* `-e TZ` for setting timezone information, eg Europe/London
 
-It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it <container-name> /bin/bash`.
+It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it booksonic /bin/bash`.
 
 ### User / Group Identifiers
 
@@ -58,22 +69,23 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Setting up the application
 
-Insert a basic user guide here to get a n00b up and running with the software inside the container. DELETE ME
+Access WebUI at `<your-ip>:4040`.
 
+Default user/pass is admin/admin
 
 ## Info
 
-* Shell access whilst the container is running: `docker exec -it <container-name> /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f <container-name>`
+* Shell access whilst the container is running: `docker exec -it booksonic /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f booksonic`
 
 * container version number 
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' <container-name>`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' booksonic`
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' <image-name>`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/booksonic`
 
 ## Versions
 
-+ **dd.MM.yy:** This is the standard Version type now.
++ **13.12.16:** Initial Release.
