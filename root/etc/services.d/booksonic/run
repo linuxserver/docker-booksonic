@@ -7,7 +7,8 @@
 URL_BASE="/${CONTEXT_PATH}"
 
 
-cd /app/booksonic
+cd /app/booksonic || exit
+
 exec \
 	s6-setuidgid abc java \
 	-D"${BOOKSONIC_OPT_PREFIX}".home=/config \
