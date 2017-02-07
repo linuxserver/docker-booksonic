@@ -12,25 +12,25 @@ COPY prebuilds/ /prebuilds/
 # environment settings
 ENV BOOKSONIC_OPT_PREFIX="subsonic"
 
+# package settings
+ARG JETTY_VER="9.3.14.v20161028"
+
 # install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \
 	curl \
-	openjdk8 \
-	tar && \
+	tar \
+	openjdk8 && \
 
 # install runtime packages
  apk add --no-cache \
 	ffmpeg \
 	flac \
 	lame \
-	openjdk8-jre \
-	ttf-dejavu && \
+	ttf-dejavu \
+	openjdk8-jre && \
 
 # install jetty-runner
- JETTY_VER=$(curl -v --silent \
-	https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-runner/maven-metadata.xml 2>&1 \
-	| grep \<release\> | cut -f2 -d">"| cut -f1 -d"<") && \
  mkdir -p \
 	/tmp/jetty && \
  cp /prebuilds/* /tmp/jetty/ && \
