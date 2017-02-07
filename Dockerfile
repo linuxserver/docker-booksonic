@@ -1,4 +1,4 @@
-FROM lsiobase/alpine
+FROM lsiobase/alpine:3.5
 MAINTAINER sparklyballs
 
 # set version label
@@ -11,7 +11,6 @@ COPY prebuilds/ /prebuilds/
 
 # package version settings
 ARG BOOKSONIC_VER="1.1.Beta1"
-ARG JETTY_VER="9.3.14.v20161028"
 
 # environment settings
 ENV BOOKSONIC_OPT_PREFIX="subsonic"
@@ -32,6 +31,9 @@ RUN \
 	ttf-dejavu && \
 
 # install jetty-runner
+ JETTY_VER=$(curl -v --silent \
+	https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-runner/maven-metadata.xml 2>&1 \
+	| grep \<release\> | cut -f2 -d">"|cut -f1 -d"<") && \
  mkdir -p \
 	/tmp/jetty && \
  cp /prebuilds/* /tmp/jetty/ && \
