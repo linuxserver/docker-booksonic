@@ -9,9 +9,6 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 # copy prebuild files
 COPY prebuilds/ /prebuilds/
 
-# package version settings
-ARG BOOKSONIC_VER="1.1.Beta1"
-
 # environment settings
 ENV BOOKSONIC_OPT_PREFIX="subsonic"
 
@@ -33,7 +30,7 @@ RUN \
 # install jetty-runner
  JETTY_VER=$(curl -v --silent \
 	https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-runner/maven-metadata.xml 2>&1 \
-	| grep \<release\> | cut -f2 -d">"|cut -f1 -d"<") && \
+	| grep \<release\> | cut -f2 -d">"| cut -f1 -d"<") && \
  mkdir -p \
 	/tmp/jetty && \
  cp /prebuilds/* /tmp/jetty/ && \
@@ -46,6 +43,8 @@ RUN \
  install -m755 -D jetty-runner /usr/bin/jetty-runner && \
 
 # install booksonic
+ BOOKSONIC_VER=$(curl -sX GET "https://api.github.com/repos/popeen/Popeens-Subsonic/releases" \
+	| awk '/tag_name/{print $4;exit}' FS='[""]') && \
  mkdir -p \
 	/app/booksonic && \
  curl -o \
