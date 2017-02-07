@@ -1,4 +1,4 @@
-FROM lsiobase/alpine
+FROM lsiobase/alpine:3.5
 MAINTAINER sparklyballs
 
 # set version label
@@ -9,27 +9,27 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 # copy prebuild files
 COPY prebuilds/ /prebuilds/
 
-# package version settings
-ARG BOOKSONIC_VER="1.1.Beta1"
-ARG JETTY_VER="9.3.14.v20161028"
-
 # environment settings
 ENV BOOKSONIC_OPT_PREFIX="subsonic"
+
+# package settings
+ARG BOOKSONIC_VER="1.1.Beta1"
+ARG JETTY_VER="9.3.14.v20161028"
 
 # install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \
 	curl \
-	openjdk8 \
-	tar && \
+	tar \
+	openjdk8 && \
 
 # install runtime packages
  apk add --no-cache \
 	ffmpeg \
 	flac \
 	lame \
-	openjdk8-jre \
-	ttf-dejavu && \
+	ttf-dejavu \
+	openjdk8-jre && \
 
 # install jetty-runner
  mkdir -p \
