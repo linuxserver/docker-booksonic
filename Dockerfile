@@ -13,6 +13,7 @@ COPY prebuilds/ /prebuilds/
 ENV BOOKSONIC_OPT_PREFIX="subsonic"
 
 # package settings
+ARG BOOKSONIC_VER="1.1.Beta1"
 ARG JETTY_VER="9.3.14.v20161028"
 
 # install build packages
@@ -43,8 +44,6 @@ RUN \
  install -m755 -D jetty-runner /usr/bin/jetty-runner && \
 
 # install booksonic
- BOOKSONIC_VER=$(curl -sX GET "https://api.github.com/repos/popeen/Popeens-Subsonic/releases" \
-	| awk '/tag_name/{print $4;exit}' FS='[""]') && \
  mkdir -p \
 	/app/booksonic && \
  curl -o \
