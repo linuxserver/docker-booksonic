@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.6
+FROM lsiobase/alpine:3.5
 MAINTAINER sparklyballs
 
 # set version label
@@ -14,7 +14,7 @@ ENV BOOKSONIC_OPT_PREFIX="subsonic"
 
 # package settings
 ARG BOOKSONIC_VER="1.1.Beta1"
-ARG JETTY_VER="9.4.5.v20170502"
+ARG JETTY_VER="9.3.14.v20161028"
 
 # install build packages
 RUN \
