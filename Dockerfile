@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.7
+FROM lsiobase/java:bionic
 
 # set version label
 ARG BUILD_DATE
@@ -17,18 +17,6 @@ ARG BOOKSONIC_VER="1.1.Beta1"
 ARG JETTY_VER="9.3.14.v20161028"
 
 RUN \
- echo "**** install build packages ****" && \
- apk add --no-cache --virtual=build-dependencies \
-	curl \
-	tar \
-	openjdk8 && \
- echo "**** install runtime packages ****" && \
- apk add --no-cache \
-	ffmpeg \
-	flac \
-	lame \
-	ttf-dejavu \
-	openjdk8-jre && \
  echo "**** install jetty-runner ****" && \
  mkdir -p \
 	/tmp/jetty && \
@@ -47,10 +35,10 @@ RUN \
  /app/booksonic/booksonic.war -L \
 	"https://github.com/popeen/Popeens-Subsonic/releases/download/${BOOKSONIC_VER}/booksonic.war" && \
  echo "**** cleanup ****" && \
- apk del --purge \
-	build-dependencies && \
  rm -rf \
-	/tmp/*
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/tmp/*
 
 # add local files
 COPY root/ /
