@@ -1,4 +1,4 @@
-FROM lsiobase/java:bionic
+FROM lsiobase/ubuntu:bionic
 
 # set version label
 ARG BUILD_DATE
@@ -17,10 +17,21 @@ ENV BOOKSONIC_OPT_PREFIX="subsonic"
 ARG JETTY_VER="9.3.14.v20161028"
 
 RUN \
- echo "**** install jq ****" && \
+ echo "**** install runtime packages ****" && \
  apt-get update && \
  apt-get install -y \
-	jq && \
+	--no-install-recommends \
+	ca-certificates \
+	ffmpeg \
+	flac \
+	fontconfig \
+	jq \
+	lame \
+	openjdk-8-jre-headless \
+	ttf-dejavu && \
+ echo "**** fix XXXsonic status page ****" && \
+ find /etc -name "accessibility.properties" -exec rm -fv '{}' + && \
+ find /usr -name "accessibility.properties" -exec rm -fv '{}' + && \
  echo "**** install jetty-runner ****" && \
  mkdir -p \
 	/tmp/jetty && \
