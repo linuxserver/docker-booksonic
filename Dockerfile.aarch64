@@ -1,7 +1,4 @@
-FROM lsiobase/java.arm64:bionic
-
-# Add qemu to build on x86_64 systems
-COPY qemu-aarch64-static /usr/bin
+FROM lsiobase/ubuntu:arm64v8-bionic
 
 # set version label
 ARG BUILD_DATE
@@ -14,16 +11,28 @@ LABEL maintainer="sparklyballs"
 COPY prebuilds/ /prebuilds/
 
 # environment settings
-ENV BOOKSONIC_OPT_PREFIX="subsonic"
+ENV BOOKSONIC_OPT_PREFIX="subsonic" \
+LANG="C.UTF-8"
 
 # package settings
 ARG JETTY_VER="9.3.14.v20161028"
 
 RUN \
- echo "**** install jq ****" && \
+ echo "**** install runtime packages ****" && \
  apt-get update && \
  apt-get install -y \
-	jq && \
+        --no-install-recommends \
+        ca-certificates \
+        ffmpeg \
+        flac \
+        fontconfig \
+        jq \
+        lame \
+        openjdk-8-jre-headless \
+        ttf-dejavu && \
+ echo "**** fix XXXsonic status page ****" && \
+ find /etc -name "accessibility.properties" -exec rm -fv '{}' + && \
+ find /usr -name "accessibility.properties" -exec rm -fv '{}' + && \
  echo "**** install jetty-runner ****" && \
  mkdir -p \
 	/tmp/jetty && \
