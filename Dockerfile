@@ -11,7 +11,8 @@ LABEL maintainer="sparklyballs"
 COPY prebuilds/ /prebuilds/
 
 # environment settings
-ENV BOOKSONIC_OPT_PREFIX="subsonic"
+ENV BOOKSONIC_OPT_PREFIX="subsonic" \
+LANG="C.UTF-8"
 
 # package settings
 ARG JETTY_VER="9.3.14.v20161028"
