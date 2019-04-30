@@ -1,11 +1,41 @@
+FROM lsiobase/ubuntu:bionic as buildstage
+
+# version tag
+ARG BOOKSONIC_RELEASE
+
+RUN \
+ echo "**** install build packages ****" && \
+ apt-get update && \
+ apt-get install -y \
+        git \
+        jq \
+        openjdk-8-jdk && \
+ apt-get install -y \
+        --no-install-recommends \
+	maven 
+RUN \
+ echo "**** Get and checkout source at version ****" && \
+ if [ -z ${BOOKSONIC_RELEASE+x} ]; then \
+	BOOKSONIC_RELEASE=$(curl -sX GET "https://api.github.com/repos/popeen/Popeens-Subsonic/releases/latest" \
+	| jq -r '. | .tag_name'); \
+ fi && \
+ git clone https://github.com/popeen/Popeens-Subsonic.git /booksonic && \
+ cd /booksonic && \
+ git checkout ${BOOKSONIC_RELEASE}
+
+RUN \
+ echo "**** build war ****" && \
+ cd /booksonic && \
+ mvn clean package
+
+# runtime stage
 FROM lsiobase/ubuntu:bionic
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG BOOKSONIC_RELEASE
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL maintainer="sparklyballsi,thelamer"
 
 # copy prebuild files
 COPY prebuilds/ /prebuilds/
@@ -26,7 +56,6 @@ RUN \
 	ffmpeg \
 	flac \
 	fontconfig \
-	jq \
 	lame \
 	openjdk-8-jre-headless \
 	ttf-dejavu && \
@@ -44,16 +73,8 @@ RUN \
  install -m644 -D "jetty-runner-$JETTY_VER.jar" \
 	/usr/share/java/jetty-runner.jar && \
  install -m755 -D jetty-runner /usr/bin/jetty-runner && \
- echo "**** install booksonic ****" && \
- if [ -z ${BOOKSONIC_RELEASE+x} ]; then \
-	BOOKSONIC_RELEASE=$(curl -sX GET "https://api.github.com/repos/popeen/Popeens-Subsonic/releases" \
-	| jq -r '.[0] | .tag_name'); \
- fi && \
  mkdir -p \
 	/app/booksonic && \
- curl -o \
- /app/booksonic/booksonic.war -L \
-	"https://github.com/popeen/Popeens-Subsonic/releases/download/${BOOKSONIC_RELEASE}/booksonic.war" && \
  echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \
@@ -62,6 +83,7 @@ RUN \
 
 # add local files
 COPY root/ /
+COPY --from=buildstage /booksonic/subsonic-main/target/booksonic.war /app/booksonic/booksonic.war
 
 # ports and volumes
 EXPOSE 4040
