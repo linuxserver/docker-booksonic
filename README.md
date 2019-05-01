@@ -167,6 +167,7 @@ Below are the instructions for updating containers:
 
 ## Versions
 
+* **30.04.19:** - Switching to build war from source, use stable booksonic releases.
 * **24.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **16.01.19:** - Adding pipeline logic and multi arch.
 * **05.01.19:** - Linting fixes.
