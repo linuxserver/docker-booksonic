@@ -45,7 +45,7 @@ ENV BOOKSONIC_OPT_PREFIX="subsonic" \
 LANG="C.UTF-8"
 
 # package settings
-ARG JETTY_VER="9.3.14.v20161028"
+ARG JETTY_VER="9.4.3.v20170317"
 
 RUN \
  echo "**** install runtime packages ****" && \
