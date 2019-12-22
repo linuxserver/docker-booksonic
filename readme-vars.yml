@@ -36,6 +36,7 @@ app_setup_block: "Default user/pass is admin/admin"
 
 # changelog
 changelogs:
+  - { date: "22.12.19:", desc: "Revert to pulling in external war, upgrade jetty." }
   - { date: "30.04.19:", desc: "Switching to build war from source, use stable booksonic releases." }
   - { date: "24.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
   - { date: "16.01.19:", desc: "Adding pipeline logic and multi arch." }
