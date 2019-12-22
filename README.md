@@ -216,6 +216,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **22.12.19:** - Revert to pulling in external war, upgrade jetty.
 * **30.04.19:** - Switching to build war from source, use stable booksonic releases.
 * **24.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **16.01.19:** - Adding pipeline logic and multi arch.
