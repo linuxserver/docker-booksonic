@@ -32,6 +32,7 @@ gzip1.6-5ubuntu1
 hostname3.20
 init-system-helpers1.51
 java-common0.68ubuntu1~18.04.1
+jq1.5+dfsg-2
 krb5-locales1.16-2ubuntu0.1
 lame3.100-2
 libacl12.2.52-3build1
@@ -133,6 +134,7 @@ libjack-jackd2-01.9.12~dfsg-2
 libjbig02.1-3.1build1
 libjpeg-turbo81.5.2-0ubuntu5.18.04.3
 libjpeg88c-2ubuntu8
+libjq11.5+dfsg-2
 libk5crypto31.16-2ubuntu0.1
 libkeyutils11.5.9-9.2ubuntu2
 libkrb5-26-heimdal7.5.0+dfsg-1
@@ -157,6 +159,7 @@ libnspr42:4.18-1ubuntu1
 libnss32:3.35-2ubuntu2.6
 libnuma12.0.11-2.1ubuntu0.1
 libogg01.3.2-1
+libonig46.7.0-1
 libopenal-data1:1.18.2-2
 libopenal11:1.18.2-2
 libopenjp2-72.3.0-2build0.18.04.1
