@@ -47,7 +47,7 @@ RUN \
  echo "**** install booksonic ****" && \
  if [ -z ${BOOKSONIC_RELEASE+x} ]; then \
 	BOOKSONIC_RELEASE=$(curl -sX GET "https://api.github.com/repos/popeen/Popeens-Subsonic/releases" \
-	| jq -r '.[0].tag_name'); \
+	| jq -r 'first(.[] | select(.prerelease==true)) | .tag_name'); \
  fi && \
  mkdir -p \
 	/app/booksonic && \
