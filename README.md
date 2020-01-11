@@ -54,6 +54,14 @@ The architectures supported by this image are:
 | arm64 | arm64v8-latest |
 | armhf | arm32v7-latest |
 
+## Version Tags
+
+This image provides various versions that are available via tags. `latest` tag usually provides the latest stable version. Others are considered under development and caution must be exercised when using them.
+
+| Tag | Description |
+| :----: | --- |
+| latest | Stable Booksonic releases |
+| prerelease | Booksonic Pre-releases |
 
 ## Usage
 
@@ -216,6 +224,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **10.01.20:** - Pull most current release.
 * **22.12.19:** - Revert to pulling in external war, upgrade jetty.
 * **30.04.19:** - Switching to build war from source, use stable booksonic releases.
 * **24.03.19:** - Switching to new Base images, shift to arm32v7 tag.
