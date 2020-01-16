@@ -114,7 +114,7 @@ libglx-mesa019.0.8-0ubuntu0~18.04.3
 libglx01.0.0-2ubuntu2.3
 libgme00.6.2-1
 libgmp102:6.1.2+dfsg-2
-libgnutls303.5.18-1ubuntu1.1
+libgnutls303.5.18-1ubuntu1.2
 libgomp18.3.0-6ubuntu1~18.04.1
 libgpg-error01.27-6
 libgraphite2-31.3.11-2
