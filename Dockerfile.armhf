@@ -46,14 +46,14 @@ RUN \
  install -m755 -D jetty-runner /usr/bin/jetty-runner && \
  echo "**** install booksonic ****" && \
  if [ -z ${BOOKSONIC_RELEASE+x} ]; then \
-	BOOKSONIC_RELEASE=$(curl -sX GET "https://api.github.com/repos/popeen/Popeens-Subsonic/releases/latest" \
+	BOOKSONIC_RELEASE=$(curl -sX GET "https://api.github.com/repos/popeen/Booksonic-LegacyServer/releases/latest" \
 	| jq -r '. | .tag_name'); \
  fi && \
  mkdir -p \
 	/app/booksonic && \
  curl -o \
  /app/booksonic/booksonic.war -L \
-	"https://github.com/popeen/Popeens-Subsonic/releases/download/${BOOKSONIC_RELEASE}/booksonic.war" && \
+	"https://github.com/popeen/Booksonic-LegacyServer/releases/download/${BOOKSONIC_RELEASE}/booksonic.war" && \
  echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \

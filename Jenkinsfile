@@ -18,7 +18,7 @@ pipeline {
     GITLAB_NAMESPACE=credentials('gitlab-namespace-id')
     EXT_GIT_BRANCH = 'master'
     EXT_USER = 'popeen'
-    EXT_REPO = 'Popeens-Subsonic'
+    EXT_REPO = 'Booksonic-LegacyServer'
     BUILD_VERSION_ARG = 'BOOKSONIC_RELEASE'
     LS_USER = 'linuxserver'
     LS_REPO = 'docker-booksonic'
