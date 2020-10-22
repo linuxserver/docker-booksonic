@@ -98,7 +98,7 @@ libfftw3-double33.3.7-1
 libflac81.3.2-1
 libflite12.1-release-1
 libfontconfig12.12.6-0ubuntu2
-libfreetype62.8.1-2ubuntu2
+libfreetype62.8.1-2ubuntu2.1
 libfribidi00.19.7-2
 libgbm120.0.8-0ubuntu1~18.04.1
 libgcc11:8.4.0-1ubuntu1~18.04
