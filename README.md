@@ -27,6 +27,10 @@ Find us at:
 * [GitHub](https://github.com/linuxserver) - view the source for all of our repositories.
 * [Open Collective](https://opencollective.com/linuxserver) - please consider helping us by either donating or contributing to our budget
 
+# DEPRECATION NOTICE
+
+This image is deprecated. We will not offer support for this image and it will not be updated.
+Please migrate to <https://github.com/linuxserver/docker-booksonic-air>
 # [linuxserver/booksonic](https://github.com/linuxserver/docker-booksonic)
 
 [![GitHub Stars](https://img.shields.io/github/stars/linuxserver/docker-booksonic.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-booksonic)
@@ -243,6 +247,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **06.05.21:** - This image is now deprecated. Please migrate to https://github.com/linuxserver/docker-booksonic-air
 * **11.08.20:** - Changed upstream github repo location
 * **22.12.19:** - Revert to pulling in external war, upgrade jetty.
 * **30.04.19:** - Switching to build war from source, use stable booksonic releases.
