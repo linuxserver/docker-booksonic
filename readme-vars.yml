@@ -7,6 +7,10 @@ project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/ma
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is a server and an app for streaming your audiobooks to any pc or android phone. Most of the functionality is also availiable on other platforms that have apps for subsonic."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 
+# deprecation information
+project_deprecation_status: true
+project_deprecation_message: "Please migrate to <https://github.com/linuxserver/docker-booksonic-air>"
+
 # supported architectures
 available_architectures:
   - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
